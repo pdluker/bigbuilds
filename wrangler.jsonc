@@ -1,0 +1,48 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "bigbuilds",
+	"main": "src/index.js",
+	"compatibility_date": "2026-08-01",
+	"assets": {
+		"directory": "public",
+		"binding": "ASSETS"
+	},
+	// every other day, 13:00 UTC (~8am Central). Changed from twice-weekly
+	// (Tue/Fri) Aug 17, 2026 after upgrading to Workers Paid removed the
+	// 5-cron-per-account ceiling that made a 6th trigger impossible on Free.
+	// Note: "*/2" on day-of-month is not a true period-2 cycle — it resets
+	// at each month boundary, so odd-length months (31 days) can produce
+	// one back-to-back pair of days when a month ends and the next begins
+	// on two consecutive odd dates. Cosmetic for a hobby show; a KV-tracked
+	// "days since last episode" check would be the precise fix if it ever
+	// matters.
+	"triggers": {
+		"crons": [
+			"0 13 */2 * *"
+		]
+	},
+	"r2_buckets": [
+		{
+			"binding": "PODCAST_BUCKET",
+			"bucket_name": "big-builds-podcast"
+		}
+	],
+	// Workers AI binding for optional cover art (poster.js no-ops cleanly if omitted)
+	"ai": {
+		"binding": "AI"
+	},
+	"vars": {
+		"SHOW_NAME": "Big Builds",
+		"SHOW_AUTHOR": "Big Builds",
+		"SHOW_SITE_URL": "https://builds.stluker.com",
+		"COVER_IMAGE_KEY": "cover.jpg"
+	}
+	// Secrets (set via `wrangler secret put <NAME>`, not committed here):
+	//   ANTHROPIC_API_KEY
+	//   ELEVENLABS_API_KEY
+	//   NARRATOR_VOICE_ID   — ElevenLabs voice "Oxley — Rich and Deep" (set
+	//                         Aug 17, 2026). Set this to Oxley's actual Voice ID
+	//                         string (ElevenLabs Voice Library → Oxley → copy
+	//                         Voice ID), not the display name.
+	//   REFRESH_SECRET      — Bearer token for the manual /refresh endpoint
+}
