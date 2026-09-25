@@ -21,6 +21,7 @@ export const EVENTS = [
     day: 14,
     location: 'Southampton, England / North Atlantic',
     category: 'disaster-with-hope',
+    topicType: 'transportation',
     engineeringFacts: [
       'At 882 feet long, Titanic was the largest moving object ever built by humans at the time',
       'Its hull was divided into 16 watertight compartments, an idea meant to make it "unsinkable"',
@@ -39,6 +40,7 @@ export const EVENTS = [
     day: 6,
     location: 'Lakehurst, New Jersey, USA',
     category: 'disaster-with-hope',
+    topicType: 'transportation',
     engineeringFacts: [
       'The Hindenburg was longer than three football fields end to end',
       'It could cross the Atlantic Ocean in about half the time of an ocean liner',
@@ -57,6 +59,7 @@ export const EVENTS = [
     day: 27,
     location: 'San Francisco, California, USA',
     category: 'build',
+    topicType: 'structures',
     engineeringFacts: [
       'Chief engineer Joseph Strauss insisted on a safety net strung under the whole bridge — it saved 19 workers, who nicknamed themselves the "Halfway to Hell Club"',
       'The bridge was painted "International Orange" specifically because it stands out against San Francisco fog',
@@ -75,6 +78,7 @@ export const EVENTS = [
     day: 13,
     location: 'Outer space',
     category: 'rescue',
+    topicType: 'transportation',
     engineeringFacts: [
       'An oxygen tank exploded 200,000 miles from Earth, and the crew had to power down almost everything to survive',
       'Engineers on the ground built a working CO2 filter fix out of only the materials the astronauts had onboard — including duct tape and a plastic bag',
@@ -93,6 +97,7 @@ export const EVENTS = [
     day: 24,
     location: 'New York City, USA',
     category: 'build',
+    topicType: 'structures',
     engineeringFacts: [
       'It was the first steel-wire suspension bridge ever built',
       'When chief engineer John Roebling died before construction finished, his son Washington took over — and when Washington fell ill, his wife Emily learned the engineering herself and helped lead construction to completion',
@@ -110,6 +115,7 @@ export const EVENTS = [
     day: 15,
     location: 'Panama',
     category: 'build',
+    topicType: 'structures',
     engineeringFacts: [
       'It cuts through 48 miles of jungle and mountain to connect the Atlantic and Pacific Oceans',
       'Its system of locks lifts ships up and over land like a staircase of water',
@@ -127,6 +133,7 @@ export const EVENTS = [
     day: 31,
     location: 'Paris, France',
     category: 'build',
+    topicType: 'buildings',
     engineeringFacts: [
       'It was built for the 1889 World\'s Fair and was only meant to stand for 20 years',
       'Gustave Eiffel calculated its curved shape specifically to resist wind',
@@ -143,6 +150,7 @@ export const EVENTS = [
     day: 30,
     location: 'Nevada/Arizona border, USA',
     category: 'build',
+    topicType: 'structures',
     engineeringFacts: [
       'It contains enough concrete to pave a two-lane road from San Francisco to New York',
       'Because concrete that thick would take over a century to cool naturally, engineers ran a network of cooling pipes through it — like giant ice cubes inside the dam',
@@ -159,6 +167,7 @@ export const EVENTS = [
     day: 1,
     location: 'New York City, USA',
     category: 'build',
+    topicType: 'buildings',
     engineeringFacts: [
       'It was built in just 410 days — about the length of a school year and a summer combined',
       'At its fastest, the building rose 4.5 stories every week',
@@ -175,6 +184,7 @@ export const EVENTS = [
     day: 10,
     location: 'United States',
     category: 'build',
+    topicType: 'transportation',
     engineeringFacts: [
       'Two crews — one working east from California, one working west from Nebraska — raced to meet in the middle',
       'Workers blasted and dug tunnels straight through mountains using hand tools and explosives',
@@ -191,6 +201,7 @@ export const EVENTS = [
     day: 1,
     location: 'Under the English Channel, between England and France',
     category: 'build',
+    topicType: 'structures',
     engineeringFacts: [
       'Giant boring machines dug from both England and France at once, aiming to meet in the exact middle',
       'When the two tunnels finally connected, the two ends were off by only about 14 inches after miles of digging',
@@ -207,6 +218,7 @@ export const EVENTS = [
     day: 20,
     location: 'Sydney, Australia',
     category: 'build',
+    topicType: 'buildings',
     engineeringFacts: [
       'The building\'s famous curved "shells" were originally impossible to construct until an engineer realized they could all be carved from slices of one giant imaginary sphere',
       'It took 14 years to build — many more than planned — because no one had ever built shapes like this before',
@@ -223,6 +235,7 @@ export const EVENTS = [
     day: 7,
     location: 'Tacoma, Washington, USA',
     category: 'disaster-with-hope',
+    topicType: 'structures',
     engineeringFacts: [
       'The Tacoma Narrows Bridge earned the nickname "Galloping Gertie" because it visibly swayed and rippled in the wind after it opened',
       'It collapsed dramatically in a windstorm — but thanks to warnings that morning, no people were hurt (the only casualty was a dog left in a car)',
@@ -238,6 +251,7 @@ export const EVENTS = [
     year: 700,
     location: 'China',
     category: 'build',
+    topicType: 'ancient',
     engineeringFacts: [
       'It was built and rebuilt over more than 2,000 years by many different dynasties, not all at once',
       'Stretched out, its many sections add up to more than 13,000 miles',
@@ -252,6 +266,7 @@ export const EVENTS = [
     year: 1450,
     location: 'Andes Mountains, Peru',
     category: 'build',
+    topicType: 'ancient',
     engineeringFacts: [
       'Inca builders cut stones so precisely that many walls fit together without any mortar at all — not even a piece of paper slides between the blocks',
       'The city sits on a mountain ridge over 7,900 feet high and includes its own water channel system',
@@ -266,6 +281,7 @@ export const EVENTS = [
     year: -2560,
     location: 'Giza, Egypt',
     category: 'build',
+    topicType: 'ancient',
     engineeringFacts: [
       'It was built from about 2.3 million stone blocks, some weighing as much as a small elephant',
       'For over 3,800 years it was the tallest human-made structure on Earth',
@@ -282,6 +298,7 @@ export const EVENTS = [
     day: 17,
     location: 'Kitty Hawk, North Carolina, USA',
     category: 'build',
+    topicType: 'transportation',
     engineeringFacts: [
       'Orville and Wilbur Wright ran a bicycle shop and used what they learned about balance and light frames to design their airplane',
       'Their first powered flight lasted only 12 seconds and covered about 120 feet — shorter than a football field',
@@ -298,6 +315,7 @@ export const EVENTS = [
     day: 16,
     location: 'Cape Kennedy, Florida, USA',
     category: 'build',
+    topicType: 'transportation',
     engineeringFacts: [
       'Saturn V remains the most powerful rocket ever successfully flown',
       'It stood taller than a 36-story building',
@@ -314,6 +332,7 @@ export const EVENTS = [
     day: 4,
     location: 'Dubai, United Arab Emirates',
     category: 'build',
+    topicType: 'buildings',
     engineeringFacts: [
       'At over half a mile tall, it is the tallest building ever constructed',
       'Its Y-shaped floor plan was specifically designed to reduce wind forces as it gets taller',
@@ -330,6 +349,7 @@ export const EVENTS = [
     day: 31,
     location: 'Black Hills, South Dakota, USA',
     category: 'build',
+    topicType: 'buildings',
     engineeringFacts: [
       'Sculptor Gutzon Borglum and about 400 workers used dynamite to remove most of the rock, then finer tools for detail',
       'Nearly 90% of the mountain was carved away using carefully placed dynamite blasts — precise enough to leave the faces intact',
@@ -350,6 +370,7 @@ export const EVENTS = [
     day: 24,
     location: 'New York City, USA',
     category: 'rescue',
+    topicType: 'buildings',
     engineeringFacts: [
       'A year after the 59-story tower opened, an engineering student\'s question led the building\'s own structural engineer, William LeMessurier, to re-check his math — and discover the building could topple in a strong enough storm',
       'Rather than stay quiet, LeMessurier reported the flaw himself and organized a fix: welding thick steel plates over 200 joints, working through the night for weeks',
@@ -368,6 +389,7 @@ export const EVENTS = [
     day: 18,
     location: 'Connecticut, USA',
     category: 'rescue',
+    topicType: 'buildings',
     engineeringFacts: [
       'The arena\'s huge flat roof collapsed under the weight of heavy snow — just a few hours after a full crowd of thousands had gone home',
       'Investigators found the roof\'s space-frame design hadn\'t accounted for how much extra weight could build up in exactly this kind of snowstorm',
@@ -386,6 +408,7 @@ export const EVENTS = [
     day: 4,
     location: 'Kansas City, USA',
     category: 'rescue',
+    topicType: 'buildings',
     engineeringFacts: [
       'A storm caused the arena\'s roof to collapse — but it happened at night while the building was completely empty',
       'Investigators traced the failure to a small but critical bolt connection that wasn\'t strong enough for the loads the roof could experience',
@@ -404,6 +427,7 @@ export const EVENTS = [
     day: 14,
     location: 'Venice, Italy',
     category: 'rescue',
+    topicType: 'buildings',
     engineeringFacts: [
       "St Mark's Campanile had stood for about 1,000 years before cracks began appearing in its walls",
       'The cracks grew large enough that officials cleared the whole square days before it finally collapsed — the only casualty was a caretaker\'s cat',
@@ -424,6 +448,7 @@ export const EVENTS = [
     day: 21,
     location: 'Aegean Sea',
     category: 'rescue',
+    topicType: 'transportation',
     engineeringFacts: [
       'RMS Britannic was built as Titanic\'s sister ship, using everything engineers had just learned from the Titanic disaster — far more lifeboats, a stronger double hull, and higher watertight walls',
       'When Britannic struck a wartime mine and began to sink, those exact improvements meant lifeboats and rescue ships had far more time to reach everyone aboard',
@@ -442,6 +467,7 @@ export const EVENTS = [
     day: 25,
     location: 'Atlantic Ocean, off Nantucket',
     category: 'rescue',
+    topicType: 'transportation',
     engineeringFacts: [
       'Andrea Doria collided with another ocean liner in thick fog and took on water fast',
       'Because her builders had designed her with a double hull and multiple watertight compartments, she stayed afloat for over 11 hours — long enough for nearby ships to rescue nearly everyone aboard',
@@ -460,6 +486,7 @@ export const EVENTS = [
     day: 13,
     location: 'Isola del Giglio, Italy',
     category: 'rescue',
+    topicType: 'transportation',
     engineeringFacts: [
       'The cruise ship Costa Concordia ran aground and rolled onto its side near a small Italian island',
       'Almost everyone aboard made it safely to shore, but the ship itself — as long as three football fields — was left lying on the seafloor',
@@ -478,6 +505,7 @@ export const EVENTS = [
     day: 10,
     location: 'Lake Superior',
     category: 'disaster-with-hope',
+    topicType: 'transportation',
     engineeringFacts: [
       'The Edmund Fitzgerald was one of the largest freighters ever to sail the Great Lakes, hauling iron ore for 17 years',
       'A sudden, ferocious storm with hurricane-force winds and towering waves overwhelmed the ship on Lake Superior',
@@ -496,6 +524,7 @@ export const EVENTS = [
     day: 24,
     location: 'Chicago River, USA',
     category: 'disaster-with-hope',
+    topicType: 'transportation',
     engineeringFacts: [
       'After the Titanic disaster, ships everywhere were required to carry many more lifeboats — including the SS Eastland',
       'But Eastland was already a bit top-heavy by design, and the extra weight of all those new lifeboats, high up on the deck, made her unstable',
@@ -516,6 +545,7 @@ export const EVENTS = [
     day: 28,
     location: 'Scotland',
     category: 'disaster-with-hope',
+    topicType: 'structures',
     engineeringFacts: [
       'The Tay Bridge was, at the time, the longest bridge in the world, built to carry trains high above the Firth of Tay',
       'During a severe storm, high winds caused the central section to collapse just as a train was crossing',
@@ -534,6 +564,7 @@ export const EVENTS = [
     day: 3,
     location: 'Germany',
     category: 'disaster-with-hope',
+    topicType: 'transportation',
     engineeringFacts: [
       'Germany\'s ICE trains were some of the fastest, smoothest passenger trains ever built, using a special wheel design meant to reduce noise and vibration',
       'A tiny crack — invisible from the outside — slowly grew inside one wheel over months of travel until it finally gave way at high speed',
@@ -553,6 +584,7 @@ export const EVENTS = [
     hemisphere: 'southern',
     location: 'New Zealand',
     category: 'disaster-with-hope',
+    topicType: 'transportation',
     engineeringFacts: [
       'A crater lake on the side of an active volcano suddenly burst through its natural dam, sending a wall of mud and water (called a lahar) down toward a rail bridge',
       'The lahar weakened the bridge\'s supports just minutes before a train was due to cross',
@@ -572,6 +604,7 @@ export const EVENTS = [
     hemisphere: 'southern',
     location: 'Sydney, Australia',
     category: 'disaster-with-hope',
+    topicType: 'transportation',
     engineeringFacts: [
       'A commuter train derailed and struck the supports of a road bridge crossing above the tracks',
       'The impact caused the heavy concrete bridge deck to collapse directly onto the train carriages below',
@@ -590,6 +623,7 @@ export const EVENTS = [
     day: 12,
     location: 'California, USA',
     category: 'disaster-with-hope',
+    topicType: 'transportation',
     engineeringFacts: [
       'A commuter train missed a red signal and collided head-on with a freight train on the same track',
       'Investigators found the accident could have been automatically prevented if the train had technology to override human error and stop itself',
@@ -608,6 +642,7 @@ export const EVENTS = [
     day: 8,
     location: 'New Jersey, USA',
     category: 'build',
+    topicType: 'transportation',
     engineeringFacts: [
       'Trains were still brand new technology — this was one of the very first passenger railways in America',
       'An axle on one of the carriages broke, sending that car off the rails',
@@ -628,6 +663,7 @@ export const EVENTS = [
     day: 29,
     location: "St. Lawrence River, Canada",
     category: "disaster-with-hope",
+    topicType: 'transportation',
     engineeringFacts: [
       "The Empress of Ireland collided with another ship in thick fog on the St. Lawrence River and sank in about 14 minutes \u2014 one of the fastest sinkings of a large ocean liner in history",
       "Investigators found watertight doors couldn't be closed fast enough once the hull was breached, which reshaped how quickly future ships were required to seal off flooding compartments",
@@ -644,6 +680,7 @@ export const EVENTS = [
     day: 27,
     location: "Mississippi River, near Memphis, USA",
     category: "disaster-with-hope",
+    topicType: 'transportation',
     engineeringFacts: [
       "The Sultana was a steamboat designed to carry a few hundred passengers, but one of her four boilers exploded while she was badly overloaded",
       "Investigators later found the boiler had been hastily patched instead of properly rebuilt just days before",
@@ -660,6 +697,7 @@ export const EVENTS = [
     day: 6,
     location: "Zeebrugge, Belgium",
     category: "disaster-with-hope",
+    topicType: 'transportation',
     engineeringFacts: [
       "The ferry Herald of Free Enterprise left port with its bow doors still open, and water flooded in as soon as it picked up speed",
       "Investigators found no single instrument on the bridge told the crew the doors were open \u2014 a gap in the ship's design, not just a missed checklist item",
@@ -676,6 +714,7 @@ export const EVENTS = [
     day: 8,
     location: "Off the coast of New Jersey, USA",
     category: "disaster-with-hope",
+    topicType: 'transportation',
     engineeringFacts: [
       "A fire broke out aboard the ocean liner Morro Castle during a storm just off the New Jersey coast, spreading fast through recently updated public spaces finished in flammable materials",
       "The ship's radio operator sent distress calls that helped guide rescue ships to the scene despite the chaos",
@@ -692,6 +731,7 @@ export const EVENTS = [
     day: 10,
     location: "North Atlantic Ocean",
     category: "disaster-with-hope",
+    topicType: 'transportation',
     engineeringFacts: [
       "USS Thresher was one of the most advanced submarines ever built, testing how deep a submarine could safely dive",
       "During a deep test dive, a systems failure kept the submarine from surfacing in time",
@@ -708,6 +748,7 @@ export const EVENTS = [
     day: 28,
     location: "Baltic Sea",
     category: "disaster-with-hope",
+    topicType: 'transportation',
     engineeringFacts: [
       "The ferry MV Estonia sank in heavy seas after the locks holding its bow visor closed failed under the pounding of large waves",
       "The disaster prompted a complete redesign standard for ferry bow-visor locking systems across Europe",
@@ -724,6 +765,7 @@ export const EVENTS = [
     day: 29,
     location: "Ashtabula, Ohio, USA",
     category: "disaster-with-hope",
+    topicType: 'structures',
     engineeringFacts: [
       "An iron truss railroad bridge collapsed in a snowstorm just as a train was crossing it, after years of gradual, invisible metal fatigue",
       "Investigators found the bridge's iron design had never been properly load-tested for real winter conditions",
@@ -740,6 +782,7 @@ export const EVENTS = [
     day: 27,
     location: "Danville, Virginia, USA",
     category: "disaster-with-hope",
+    topicType: 'transportation',
     engineeringFacts: [
       "The Fast Mail train, nicknamed 'Old 97,' was running behind schedule and took a curve on a high trestle far too fast",
       "The wreck became so famous it was turned into one of the best-selling folk songs of the early 20th century, still recorded by musicians today",
@@ -756,6 +799,7 @@ export const EVENTS = [
     day: 12,
     location: "London, England",
     category: "disaster-with-hope",
+    topicType: 'transportation',
     engineeringFacts: [
       "A commuter train crashed into a stopped train because a signal wrongly showed 'clear' \u2014 the result of old wiring never fully disconnected during recent maintenance",
       "Investigators traced the fault to a single loose wire left from an incomplete rewiring job",
@@ -772,6 +816,7 @@ export const EVENTS = [
     day: 5,
     location: "London, England",
     category: "disaster-with-hope",
+    topicType: 'transportation',
     engineeringFacts: [
       "Two trains collided head-on after one passed a signal showing danger \u2014 a signal later found notoriously difficult to see clearly in bright sunlight",
       "Investigators found other drivers had passed that same signal in error before, without the warning being acted on in time",
@@ -788,6 +833,7 @@ export const EVENTS = [
     day: 8,
     location: "London, England",
     category: "disaster-with-hope",
+    topicType: 'transportation',
     engineeringFacts: [
       "In thick fog, a train passed a danger signal and collided with a stopped train, and a third train then crashed into the wreckage moments later",
       "It remains one of the events that most shaped modern railway safety technology in Britain",
@@ -804,6 +850,7 @@ export const EVENTS = [
     day: 28,
     location: "North Yorkshire, England",
     category: "disaster-with-hope",
+    topicType: 'transportation',
     engineeringFacts: [
       "A car left the motorway, crossed a barrier, and landed on the railway tracks below just before a train arrived",
       "The collision derailed the passenger train directly into the path of an oncoming freight train",
@@ -820,6 +867,7 @@ export const EVENTS = [
     day: 5,
     location: "London, England",
     category: "disaster-with-hope",
+    topicType: 'transportation',
     engineeringFacts: [
       "A passenger train derailed after running over a broken rail \u2014 a crack that had been growing invisibly inside the metal",
       "Investigators found the type of rail joint in use was especially prone to this kind of hidden fatigue crack",
@@ -836,6 +884,7 @@ export const EVENTS = [
     day: 27,
     location: "Paris, France",
     category: "disaster-with-hope",
+    topicType: 'transportation',
     engineeringFacts: [
       "A commuter train's brakes failed as it approached a busy Paris terminus, and it collided with a stationary train ahead",
       "Investigators found the braking system had no reliable backup if the primary system failed under certain conditions",
@@ -852,6 +901,7 @@ export const EVENTS = [
     day: 6,
     location: "Philadelphia, USA",
     category: "disaster-with-hope",
+    topicType: 'transportation',
     engineeringFacts: [
       "A piece of undercarriage equipment on the Congressional Limited came loose at speed and caused the train to derail on a curve at Frankford Junction",
       "That same curve saw a strikingly similar high-speed derailment more than seventy years later, in 2015",
@@ -868,6 +918,7 @@ export const EVENTS = [
     day: 12,
     location: "Philadelphia, USA",
     category: "disaster-with-hope",
+    topicType: 'transportation',
     engineeringFacts: [
       "A passenger train entered a sharp curve at more than twice the posted speed limit and derailed",
       "The same curve at Frankford Junction had seen a nearly identical derailment in 1943 (see the Congressional Limited)",
@@ -884,6 +935,7 @@ export const EVENTS = [
     day: 17,
     location: "Kansas City, USA",
     category: "disaster-with-hope",
+    topicType: 'buildings',
     engineeringFacts: [
       "Two suspended walkways crossing the hotel's atrium collapsed onto a crowded party below",
       "A last-minute change to how the walkways were connected \u2014 swapping one long connecting rod for two shorter ones \u2014 accidentally doubled the load on a single critical connection, without anyone re-checking the math",
@@ -900,6 +952,7 @@ export const EVENTS = [
     day: 16,
     location: "London, England",
     category: "disaster-with-hope",
+    topicType: 'buildings',
     engineeringFacts: [
       "A relatively small gas explosion in one apartment caused an entire corner of the high-rise tower to collapse, floor after floor, straight down",
       "Investigators found the building's precast concrete panels weren't designed to hold together if one section failed \u2014 there was no backup structural path",
@@ -916,6 +969,7 @@ export const EVENTS = [
     day: 25,
     location: "Boston, USA",
     category: "disaster-with-hope",
+    topicType: 'buildings',
     engineeringFacts: [
       "An apartment building under construction collapsed floor by floor while concrete was still being poured on an upper level",
       "Investigators found the concrete on lower floors hadn't been given enough time to fully cure and gain its real strength before more weight was added on top",
@@ -932,6 +986,7 @@ export const EVENTS = [
     day: 30,
     location: "Chicago, USA",
     category: "disaster-with-hope",
+    topicType: 'buildings',
     engineeringFacts: [
       "A fire broke out during a crowded matinee, and many of the theater's exit doors opened inward, jamming shut against the crowd trying to leave",
       "The disaster directly led to the invention of the 'panic bar' \u2014 a horizontal bar across a door that lets anyone open it just by pushing forward, even in a crush of people",
@@ -948,6 +1003,7 @@ export const EVENTS = [
     day: 28,
     location: "Boston, USA",
     category: "disaster-with-hope",
+    topicType: 'buildings',
     engineeringFacts: [
       "A fire spread rapidly through a crowded nightclub, and the club's revolving front door \u2014 its main entrance \u2014 jammed as people tried to escape through it",
       "The disaster led directly to modern fire-safety law: exit doors must open outward, must never be locked during business hours, and revolving doors must have regular hinged doors right beside them",
@@ -964,6 +1020,7 @@ export const EVENTS = [
     day: 2,
     location: "Bailey's Crossroads, Virginia, USA",
     category: "disaster-with-hope",
+    topicType: 'buildings',
     engineeringFacts: [
       "An apartment building under construction collapsed when workers removed concrete floor supports (shoring) before the concrete above had fully cured",
       "Investigators found the crew was under pressure to move shoring to the next level quickly to keep construction on schedule",
@@ -980,6 +1037,7 @@ export const EVENTS = [
     day: 12,
     location: "California, USA",
     category: "disaster-with-hope",
+    topicType: 'structures',
     engineeringFacts: [
       "The St. Francis Dam failed catastrophically just hours after its chief engineer personally inspected it and found nothing alarming",
       "Investigators later found the dam had been built on ground that wasn't strong enough to support it \u2014 a geological problem, not a flaw in the concrete itself",
@@ -996,6 +1054,7 @@ export const EVENTS = [
     day: 31,
     location: "Pennsylvania, USA",
     category: "disaster-with-hope",
+    topicType: 'structures',
     engineeringFacts: [
       "The South Fork Dam had been modified over the years in ways that reduced its ability to handle heavy flooding, including lowering its height and blocking spillway pipes",
       "After days of extremely heavy rain, the dam gave way, releasing the lake behind it all at once",
@@ -1012,6 +1071,7 @@ export const EVENTS = [
     day: 4,
     location: "Scotland",
     category: "build",
+    topicType: 'structures',
     engineeringFacts: [
       "The Forth Bridge is a massive steel cantilever bridge \u2014 instead of hanging from cables like a suspension bridge, its own steel arms balance and support each other outward from three enormous towers",
       "It used more steel than almost any structure built before it, at a scale many engineers of the time doubted was possible",
@@ -1028,6 +1088,7 @@ export const EVENTS = [
     day: 14,
     location: "France",
     category: "build",
+    topicType: 'structures',
     engineeringFacts: [
       "The Millau Viaduct's tallest support tower rises taller than the Eiffel Tower, carrying a highway across a deep river valley",
       "Engineers designed impossibly slender-looking towers and cables specifically so the bridge would seem to almost float above the valley's morning fog",
@@ -1044,6 +1105,7 @@ export const EVENTS = [
     day: 5,
     location: "Japan",
     category: "build",
+    topicType: 'structures',
     engineeringFacts: [
       "The Akashi Kaikyo Bridge crosses a strait known for powerful currents, heavy ship traffic, and major earthquakes \u2014 engineers had to design for all three at once",
       "During construction, a major earthquake actually shifted the two support towers slightly farther apart \u2014 engineers simply adjusted the bridge's final length to match",
@@ -1060,6 +1122,7 @@ export const EVENTS = [
     day: 15,
     location: "Switzerland",
     category: "build",
+    topicType: 'structures',
     engineeringFacts: [
       "Two giant tunnel-boring machines started at opposite ends of the Swiss Alps and dug toward each other for years, aiming to meet in the exact middle deep underground",
       "When the two tunnels finally connected, deep beneath the mountains, the alignment was off by only a few centimeters after miles and miles of digging",
@@ -1076,6 +1139,7 @@ export const EVENTS = [
     day: 13,
     location: "New York and New Jersey, USA",
     category: "build",
+    topicType: 'structures',
     engineeringFacts: [
       "The Holland Tunnel was one of the first tunnels built for cars to pass underwater, and engineers faced a problem nobody had really solved before: how do you clear car exhaust out of a tube running beneath a river?",
       "Chief engineer Clifford Holland designed a massive ventilation system with giant fans that completely changes the air inside the tunnel every 90 seconds",
@@ -1092,6 +1156,7 @@ export const EVENTS = [
     day: 26,
     location: "New York, USA",
     category: "build",
+    topicType: 'structures',
     engineeringFacts: [
       "Workers dug 363 miles of canal by hand and with horse-drawn scrapers, connecting the Hudson River all the way to the Great Lakes, before any powered earthmoving equipment existed",
       "Engineers had to invent a stair-step system of locks to lift and lower boats up and down more than 500 feet of elevation change along the route",
@@ -1108,6 +1173,7 @@ export const EVENTS = [
     day: 4,
     location: "China",
     category: "build",
+    topicType: 'structures',
     engineeringFacts: [
       "The Three Gorges Dam is one of the largest engineering structures ever built, holding back one of the world's biggest rivers",
       "Its hydroelectric generators produce enough electricity to power tens of millions of homes without burning any fuel",
@@ -1122,6 +1188,7 @@ export const EVENTS = [
     year: -312,
     location: "Across the Roman Empire",
     category: "build",
+    topicType: 'structures',
     engineeringFacts: [
       "Roman engineers moved water across dozens of miles using nothing but gravity \u2014 calculating an extremely gentle, precise downward slope over the entire distance so water would flow on its own",
       "Where a valley was in the way, they built towering stone arches to carry the water channel across at exactly the right height",
@@ -1136,6 +1203,7 @@ export const EVENTS = [
     year: 50,
     location: "France",
     category: "build",
+    topicType: 'structures',
     engineeringFacts: [
       "The Pont du Gard is a three-tiered stone bridge built to carry a Roman aqueduct across a river valley, using precisely cut stone blocks with no mortar holding most of them together",
       "The whole structure drops only about an inch in height across its entire length \u2014 an almost unbelievably gentle, exact slope for water flowing entirely by gravity",
@@ -1152,6 +1220,7 @@ export const EVENTS = [
     day: 8,
     location: "London, England",
     category: "build",
+    topicType: 'structures',
     engineeringFacts: [
       "The Thames Barrier is a row of giant curved steel gates lying flat on the riverbed, which can rotate upright in minutes to block London's river from a dangerous storm surge",
       "Its shape was inspired by looking at everyday gas taps \u2014 engineers realized a simple rotating valve shape could be scaled up to hold back an entire river",
@@ -1168,6 +1237,7 @@ export const EVENTS = [
     day: 17,
     location: "USA",
     category: "build",
+    topicType: 'transportation',
     engineeringFacts: [
       "The DC-3 made its first flight on December 17, 1935 \u2014 exactly 32 years to the day after the Wright Brothers' first powered flight",
       "It wasn't the fastest or most advanced plane of its time, but it was reliable enough that airlines could finally make regular passenger flights that didn't depend on perfect conditions",
@@ -1184,6 +1254,7 @@ export const EVENTS = [
     day: 9,
     location: "USA",
     category: "build",
+    topicType: 'transportation',
     engineeringFacts: [
       "When it first flew, the Boeing 747 was so much larger than any earlier passenger plane that engineers had to invent new hangars, runways, and airport gates just to handle it",
       "Its distinctive hump shape came from a practical decision \u2014 the cockpit was raised above the main cabin so the nose could open upward for loading huge cargo",
@@ -1198,6 +1269,7 @@ export const EVENTS = [
     year: 1966,
     location: "Apollo spacecraft",
     category: "build",
+    topicType: 'inventions',
     engineeringFacts: [
       "The computer that helped guide astronauts to the Moon had far less computing power than a modern calculator watch",
       "Engineers had to write every instruction with extreme care, since there was no room to waste a single bit of memory",
@@ -1214,6 +1286,7 @@ export const EVENTS = [
     day: 20,
     location: "The Moon",
     category: "build",
+    topicType: 'transportation',
     engineeringFacts: [
       "Landing on the Moon required solving problems in propulsion, navigation, life support, and communications all at once, with hundreds of thousands of people working on different pieces of the puzzle",
       "The lunar module's onboard computer flashed unexpected alarm codes during the actual landing, and a ground engineer had to instantly recognize them as safe to ignore so the landing could continue",
@@ -1230,6 +1303,7 @@ export const EVENTS = [
     day: 12,
     location: "Cape Canaveral, USA",
     category: "build",
+    topicType: 'transportation',
     engineeringFacts: [
       "Before the Space Shuttle, every rocket that launched astronauts into space was used exactly once and then discarded",
       "Engineers had to solve an entirely new problem: how do you build something that can survive launching into space, working in orbit, and then coming back through the fiery heat of re-entry \u2014 and do it again and again?",
@@ -1246,6 +1320,7 @@ export const EVENTS = [
     day: 24,
     location: "Earth orbit",
     category: "rescue",
+    topicType: 'transportation',
     engineeringFacts: [
       "Shortly after launch, engineers discovered Hubble's massive mirror had been ground very slightly the wrong shape, blurring its images",
       "Because engineers had deliberately designed Hubble so astronauts could visit and service it in orbit, a repair mission was possible \u2014 something no earlier space telescope had ever allowed for",
@@ -1262,6 +1337,7 @@ export const EVENTS = [
     day: 20,
     location: "Low Earth orbit",
     category: "build",
+    topicType: 'transportation',
     engineeringFacts: [
       "The International Space Station was assembled piece by piece in orbit, launched on more than 40 separate rockets from multiple countries over more than a decade",
       "Astronauts used robotic arms and spacewalks to connect modules together hundreds of miles above Earth, where a single dropped tool could float away forever",
@@ -1278,6 +1354,7 @@ export const EVENTS = [
     day: 25,
     location: "Deep space",
     category: "build",
+    topicType: 'transportation',
     engineeringFacts: [
       "Webb's mirror and sunshield were far too large to fit inside any rocket while fully assembled, so engineers designed the entire telescope to fold up like origami for launch",
       "After launch, it had to unfold itself automatically in space through more than 300 separate steps, any one of which could have failed with no way for anyone to fix it by hand",
@@ -1292,6 +1369,7 @@ export const EVENTS = [
     year: 1804,
     location: "France",
     category: "build",
+    topicType: 'inventions',
     engineeringFacts: [
       "The Jacquard loom used a chain of punched cards to automatically control which threads a weaving machine picked up, letting it weave complex patterns without a person guiding every thread by hand",
       "Each hole (or absence of a hole) on a card was essentially an instruction the machine could 'read' \u2014 an early ancestor of how computers store and follow instructions",
@@ -1308,6 +1386,7 @@ export const EVENTS = [
     day: 24,
     location: "England",
     category: "build",
+    topicType: 'inventions',
     engineeringFacts: [
       "Before Henry Bessemer's process, making high-quality steel was slow and expensive, so most bridges, rails, and buildings were built from weaker iron instead",
       "Bessemer discovered that blasting air through molten iron burned out its impurities in minutes, transforming it into strong steel \u2014 a process that used to take days",
@@ -1324,6 +1403,7 @@ export const EVENTS = [
     day: 1,
     location: "Highland Park, Michigan, USA",
     category: "build",
+    topicType: 'inventions',
     engineeringFacts: [
       "Instead of a team of workers building one whole car from start to finish, Henry Ford's factory moved each car past workers on a conveyor system, and each worker did just one specific task as it passed by",
       "This reorganization cut the time it took to build a car from over 12 hours down to about 90 minutes",
@@ -1340,6 +1420,7 @@ export const EVENTS = [
     day: 26,
     location: "Newark to Houston, USA",
     category: "build",
+    topicType: 'inventions',
     engineeringFacts: [
       "Before shipping containers, cargo was loaded onto ships piece by piece by hand \u2014 a slow, expensive process called 'break bulk' shipping",
       "A truck driver named Malcolm McLean had the idea to build one standard-sized steel box that could move straight from a truck to a train to a ship without ever being unpacked and repacked",
@@ -1354,6 +1435,7 @@ export const EVENTS = [
     year: 1854,
     location: "New York, USA",
     category: "rescue",
+    topicType: 'inventions',
     engineeringFacts: [
       "Before Elisha Otis's invention, elevators were considered too dangerous for people to ride, since a snapped lifting cable meant a straight fall",
       "Otis designed a safety brake that automatically grips the elevator's guide rails the instant the cable's tension is lost \u2014 the platform simply can't fall",

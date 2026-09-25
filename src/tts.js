@@ -20,7 +20,7 @@
  */
 
 const MAX_BLOCK_CHARS = 8000;
-const NARRATION_SPEED = 1.2; // confirmed ceiling — see comment above; ElevenLabs hard-rejects anything above this, does not clamp
+const NARRATION_SPEED = 1.0; // confirmed ceiling — see comment above; ElevenLabs hard-rejects anything above this, does not clamp
 
 export async function generateAudio(narrationText, env) {
   const blocks = splitIntoBlocks(narrationText, MAX_BLOCK_CHARS);

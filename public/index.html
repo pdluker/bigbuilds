@@ -158,7 +158,7 @@
     font-weight: 600;
     text-decoration: none;
     letter-spacing: 0.03em;
-    padding: 11px 18px;
+    padding: 15px 22px;
     border-radius: var(--radius);
     display: inline-flex;
     align-items: center;
@@ -232,7 +232,7 @@
     color: #4a4a4a;
   }
 
-  audio { width: 100%; }
+  audio { width: 100%; height: 40px; }
 
   .ep-list {
     display: flex;
@@ -246,11 +246,29 @@
     border-radius: 8px;
     padding: 16px 18px;
     display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 12px;
+    grid-template-columns: 64px 1fr auto;
+    gap: 14px;
     align-items: center;
     margin-bottom: 10px;
   }
+
+  .ep-row-art {
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--navy), var(--navy-deep));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brass);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 9px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .ep-row-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   .ep-row-title {
     font-family: 'Space Grotesk', sans-serif;
@@ -268,12 +286,49 @@
   .ep-row audio {
     width: 220px;
     max-width: 44vw;
-    height: 34px;
+    height: 40px;
   }
   @media (max-width: 560px) {
-    .ep-row { grid-template-columns: 1fr; }
-    .ep-row audio { width: 100%; max-width: none; }
+    .ep-row { grid-template-columns: 56px 1fr; }
+    .ep-row-art { width: 56px; height: 56px; }
+    .ep-row audio { grid-column: 1 / -1; width: 100%; max-width: none; }
   }
+
+  .topic-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 22px;
+  }
+  .topic-chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--navy);
+    background: var(--chalk);
+    border: 1.5px solid rgba(22,50,79,0.2);
+    border-radius: 999px;
+    padding: 9px 16px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .topic-chip:hover { border-color: var(--navy); }
+  .topic-chip.active {
+    background: var(--navy);
+    color: var(--chalk);
+    border-color: var(--navy);
+  }
+  .topic-section-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin: 28px 0 12px;
+  }
+  .topic-section-title:first-child { margin-top: 0; }
 
   details.transcript {
     grid-column: 1 / -1;
@@ -295,6 +350,9 @@
     opacity: 0.7;
     list-style: none;
     user-select: none;
+    padding: 8px 4px;
+    margin: -8px -4px;
+    display: inline-block;
   }
   details.transcript summary::-webkit-details-marker { display: none; }
   details.transcript summary::before { content: '▸ '; }
@@ -321,6 +379,21 @@
     color: #5c5c5c;
   }
   .empty-state strong { color: var(--navy); }
+
+  .duration-badge {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68em;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--orange);
+    border: 1.5px solid var(--orange);
+    border-radius: 999px;
+    padding: 2px 9px;
+    vertical-align: middle;
+    margin-left: 4px;
+    white-space: nowrap;
+  }
 
   footer {
     padding: 30px 0 50px;
@@ -353,7 +426,7 @@
 
 <main class="wrap" id="episodes">
   <div id="content">
-    <p class="section-label">Loading episodes…</p>
+    <p class="section-label">Getting the big builds ready…</p>
   </div>
 </main>
 
@@ -362,65 +435,128 @@
 </footer>
 
 <script>
+  const TOPIC_LABELS = {
+    transportation: '🚂 Transportation',
+    structures: '🌉 Bridges & Structures',
+    buildings: '🏢 Buildings',
+    ancient: '🏛️ Ancient Wonders',
+    inventions: '⚙️ Inventions',
+    other: '📦 Other',
+  };
+  const TOPIC_ORDER = ['transportation', 'structures', 'buildings', 'ancient', 'inventions', 'other'];
+
+  let allEpisodes = [];
+  let activeFilter = 'all';
+
+  const artHtml = (ep) => ep.artUrl
+    ? `<img src="${ep.artUrl}" alt="" />`
+    : 'BIG<br/>BUILDS';
+
+  // older episodes generated before the transcript field was added
+  // won't have one — render nothing rather than an empty toggle
+  const transcriptHtml = (ep) => ep.transcript
+    ? `<details class="transcript"><summary>View transcript</summary><div class="transcript-text">${escapeHtml(ep.transcript)}</div></details>`
+    : '';
+
+  // e.g. 245 -> "4 MIN" — matches the site's "under five minutes" promise
+  const durationBadge = (ep) => ep.durationSeconds
+    ? `<span class="duration-badge">${Math.round(ep.durationSeconds / 60)} MIN</span>`
+    : '';
+
+  const rowHtml = (ep) => `
+    <div class="ep-row">
+      <div class="ep-row-art">${artHtml(ep)}</div>
+      <div>
+        <p class="ep-row-title">${escapeHtml(ep.title)} ${durationBadge(ep)}</p>
+        <p class="ep-row-summary">${escapeHtml(ep.summary)}</p>
+      </div>
+      <audio controls preload="none" src="${ep.audioUrl}" aria-label="Play episode: ${escapeHtml(ep.title)}"></audio>
+      ${transcriptHtml(ep)}
+    </div>`;
+
+  function renderArchive(rest) {
+    const archiveEl = document.getElementById('archive');
+    if (!rest.length) {
+      archiveEl.innerHTML = '';
+      return;
+    }
+
+    // only show a filter chip for a topic that actually has an episode —
+    // avoids a row of empty categories while the archive is still small
+    const presentTopics = TOPIC_ORDER.filter((t) => rest.some((ep) => ep.topicType === t));
+
+    let chipsHtml = `<div class="topic-filters">
+      <button class="topic-chip${activeFilter === 'all' ? ' active' : ''}" data-topic="all">All</button>`;
+    for (const t of presentTopics) {
+      chipsHtml += `<button class="topic-chip${activeFilter === t ? ' active' : ''}" data-topic="${t}">${TOPIC_LABELS[t]}</button>`;
+    }
+    chipsHtml += `</div>`;
+
+    let listHtml = '';
+    if (activeFilter === 'all') {
+      // grouped by category — this is the "explore by type" default view
+      for (const t of presentTopics) {
+        const group = rest.filter((ep) => ep.topicType === t);
+        listHtml += `<p class="topic-section-title">${TOPIC_LABELS[t]}</p><div class="ep-list">`;
+        listHtml += group.map(rowHtml).join('');
+        listHtml += `</div>`;
+      }
+    } else {
+      // single category selected — flat list, still newest-first
+      const filtered = rest.filter((ep) => ep.topicType === activeFilter);
+      listHtml = `<div class="ep-list">${filtered.map(rowHtml).join('')}</div>`;
+    }
+
+    archiveEl.innerHTML = chipsHtml + listHtml;
+
+    archiveEl.querySelectorAll('.topic-chip').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        activeFilter = btn.dataset.topic;
+        renderArchive(rest);
+      });
+    });
+  }
+
   async function loadEpisodes() {
     const content = document.getElementById('content');
     try {
       const res = await fetch('/episodes.json');
       const episodes = await res.json();
+      allEpisodes = episodes;
 
       if (!episodes.length) {
         content.innerHTML = `
           <div class="empty-state">
-            <strong>First episode is on its way.</strong><br />
-            Check back in a couple of days.
+            <strong>The first big build is on its way!</strong><br />
+            Come back in a couple of days.
           </div>`;
         return;
       }
 
       const [latest, ...rest] = episodes;
 
-      const artHtml = (ep) => ep.artUrl
-        ? `<img src="${ep.artUrl}" alt="" />`
-        : 'BIG<br/>BUILDS';
-
-      // older episodes generated before the transcript field was added
-      // won't have one — render nothing rather than an empty toggle
-      const transcriptHtml = (ep) => ep.transcript
-        ? `<details class="transcript"><summary>View transcript</summary><div class="transcript-text">${escapeHtml(ep.transcript)}</div></details>`
-        : '';
-
-      let html = `
+      content.innerHTML = `
         <p class="section-label">Latest episode</p>
         <article class="latest-card">
           <div class="art-frame">${artHtml(latest)}</div>
           <div>
-            <h2 class="ep-title">${escapeHtml(latest.title)}</h2>
+            <h2 class="ep-title">${escapeHtml(latest.title)} ${durationBadge(latest)}</h2>
             <p class="ep-summary">${escapeHtml(latest.summary)}</p>
-            <audio controls preload="none" src="${latest.audioUrl}"></audio>
+            <audio controls preload="none" src="${latest.audioUrl}" aria-label="Play episode: ${escapeHtml(latest.title)}"></audio>
             ${transcriptHtml(latest)}
           </div>
         </article>
+        ${rest.length ? '<p class="section-label">Explore the archive</p>' : ''}
+        <div id="archive"></div>
       `;
 
-      if (rest.length) {
-        html += `<p class="section-label">Past episodes</p><div class="ep-list">`;
-        for (const ep of rest) {
-          html += `
-            <div class="ep-row">
-              <div>
-                <p class="ep-row-title">${escapeHtml(ep.title)}</p>
-                <p class="ep-row-summary">${escapeHtml(ep.summary)}</p>
-              </div>
-              <audio controls preload="none" src="${ep.audioUrl}"></audio>
-              ${transcriptHtml(ep)}
-            </div>`;
-        }
-        html += `</div>`;
-      }
-
-      content.innerHTML = html;
+      renderArchive(rest);
     } catch (err) {
-      content.innerHTML = `<p class="section-label">Couldn't load episodes right now — try refreshing.</p>`;
+      content.innerHTML = `
+        <div class="empty-state">
+          <strong>Oops — the builds got stuck.</strong><br />
+          Try refreshing the page.
+        </div>`;
     }
   }
 

@@ -114,7 +114,14 @@ function parseRange(header) {
 async function getEpisodes(env) {
   const obj = await env.PODCAST_BUCKET.get(EPISODES_KEY);
   if (!obj) return [];
-  return await obj.json();
+  const episodes = await obj.json();
+  // backfill topicType for episodes published before this field existed —
+  // derived live from events.js by eventId, no R2 migration needed. Falls
+  // back to 'other' only if the source event was somehow removed from the pool.
+  return episodes.map((ep) => ({
+    ...ep,
+    topicType: ep.topicType || EVENTS.find((e) => e.id === ep.eventId)?.topicType || 'other',
+  }));
 }
 
 async function getUsedEventIds(env) {
@@ -143,6 +150,15 @@ async function runEpisodeGeneration(env, now = new Date()) {
   });
   const audioSizeBytes = audio.byteLength; // needed for RSS <enclosure length="..."> — Apple Podcasts validates this
 
+  // editor's accuracy/safety findings (see script.js) — kept in R2 under
+  // reviews/, which the fetch handler never serves, rather than on the
+  // public episode record. Read with `wrangler r2 object get`.
+  await env.PODCAST_BUCKET.put(
+    `reviews/${episodeId}.json`,
+    JSON.stringify({ eventId: event.id, ...script.review }, null, 2),
+    { httpMetadata: { contentType: 'application/json' } }
+  );
+
   // cover art is best-effort — never let it block an episode from shipping
   let artKey = null;
   try {
@@ -168,6 +184,7 @@ async function runEpisodeGeneration(env, now = new Date()) {
     audioSizeBytes,
     artUrl: artKey ? `${env.SHOW_SITE_URL}/${artKey}` : null,
     durationSeconds: script.estimatedDurationSeconds,
+    topicType: event.topicType || 'other',
     publishedAt: new Date().toISOString(),
     // 'anniversary' | 'month' | 'season' | 'fallback' — which calendar tier
     // picked this event; kept on the episode record so you can eyeball how
