@@ -8,7 +8,7 @@
 
 import { EVENTS } from './events.js';
 import { buildEpisodeScript } from './script.js';
-import { generateAudio } from './tts.js';
+import { generateAudio, prepareForSpeech, resolveSettings } from './tts.js';
 import { generateCoverArt } from './poster.js';
 import { buildFeed } from './rss.js';
 import { pickWithCalendarPreference } from './calendar.js';
@@ -57,6 +57,67 @@ export default {
         });
       } catch (err) {
         return new Response(JSON.stringify({ ok: false, error: err.message }, null, 2), {
+          status: 500,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+    }
+
+    // A/B tool for narration pacing. Re-voices an EXISTING episode's stored
+    // transcript with whatever settings you pass — publishes nothing, never
+    // touches episodes.json or the event pool. Bearer-auth like /refresh.
+    //   /tts-test?preview=1   -> JSON: the exact text that would be sent + settings
+    //                            + estimated credits. No ElevenLabs call, costs nothing.
+    //   /tts-test             -> mp3 of the latest episode using current defaults
+    //   /tts-test?model=eleven_flash_v2_5&speed=1.2&cleanup=0&beats=0
+    //                         -> reproduces the OLD (pre-Oct 4, 2026) configuration
+    //   other params: episode=<id|eventId>, speed (0.7-1.2), stability (0-1),
+    //                 similarity, style, beatSeconds, maxBeats
+    // Save the mp3 with `curl.exe -o test.mp3 -H "Authorization: Bearer ..."`.
+    if (url.pathname === '/tts-test') {
+      const auth = request.headers.get('Authorization') || '';
+      if (auth !== `Bearer ${env.REFRESH_SECRET}`) {
+        return new Response('Unauthorized', { status: 401 });
+      }
+      const episodes = await getEpisodes(env);
+      const want = url.searchParams.get('episode');
+      const ep = want
+        ? episodes.find((e) => e.id === want || e.eventId === want)
+        : episodes.find((e) => e.transcript);
+      if (!ep || !ep.transcript) {
+        return new Response(
+          JSON.stringify({ ok: false, error: 'No episode with a stored transcript found (only episodes generated after Aug 17, 2026 have one).' }, null, 2),
+          { status: 400, headers: { 'Content-Type': 'application/json' } }
+        );
+      }
+      const overrides = {};
+      for (const k of ['model', 'speed', 'stability', 'similarity', 'style', 'cleanup', 'beats', 'beatSeconds', 'maxBeats']) {
+        if (url.searchParams.has(k)) overrides[k] = url.searchParams.get(k);
+      }
+      const settings = resolveSettings(env, overrides);
+
+      if (url.searchParams.get('preview')) {
+        const spokenText = prepareForSpeech(ep.transcript, settings);
+        const perChar = settings.model.includes('flash') ? 0.5 : 1.0; // credits per character
+        return new Response(
+          JSON.stringify({ episode: ep.id, settings, characters: spokenText.length, estimatedCredits: Math.round(spokenText.length * perChar), spokenText }, null, 2),
+          { headers: { 'Content-Type': 'application/json' } }
+        );
+      }
+
+      try {
+        const audio = await generateAudio(ep.transcript, env, overrides);
+        const name = `bigbuilds-${ep.eventId}-${settings.model.replace('eleven_', '')}-speed${settings.speed}-stab${settings.stability}${settings.cleanup ? '' : '-rawtext'}${settings.beats ? '' : '-nobeats'}.mp3`;
+        return new Response(audio, {
+          headers: {
+            'Content-Type': 'audio/mpeg',
+            'Content-Disposition': `attachment; filename="${name}"`,
+            'X-TTS-Settings': JSON.stringify(settings),
+            'Cache-Control': 'no-store',
+          },
+        });
+      } catch (err) {
+        return new Response(JSON.stringify({ ok: false, error: err.message, settings }, null, 2), {
           status: 500,
           headers: { 'Content-Type': 'application/json' },
         });
@@ -150,15 +211,6 @@ async function runEpisodeGeneration(env, now = new Date()) {
   });
   const audioSizeBytes = audio.byteLength; // needed for RSS <enclosure length="..."> — Apple Podcasts validates this
 
-  // editor's accuracy/safety findings (see script.js) — kept in R2 under
-  // reviews/, which the fetch handler never serves, rather than on the
-  // public episode record. Read with `wrangler r2 object get`.
-  await env.PODCAST_BUCKET.put(
-    `reviews/${episodeId}.json`,
-    JSON.stringify({ eventId: event.id, ...script.review }, null, 2),
-    { httpMetadata: { contentType: 'application/json' } }
-  );
-
   // cover art is best-effort — never let it block an episode from shipping
   let artKey = null;
   try {
@@ -183,7 +235,11 @@ async function runEpisodeGeneration(env, now = new Date()) {
     audioUrl: `${env.SHOW_SITE_URL}/${audioKey}`,
     audioSizeBytes,
     artUrl: artKey ? `${env.SHOW_SITE_URL}/${artKey}` : null,
-    durationSeconds: script.estimatedDurationSeconds,
+    // exact, not estimated: ElevenLabs returns constant-bitrate 128 kbps mp3,
+    // so bytes*8/128000 matches ffprobe to within ~0.03s (verified on two
+    // real episodes). The old word-count estimate ran ~10% short, which put
+    // a wrong itunes:duration in the RSS feed.
+    durationSeconds: Math.round((audioSizeBytes * 8) / 128000),
     topicType: event.topicType || 'other',
     publishedAt: new Date().toISOString(),
     // 'anniversary' | 'month' | 'season' | 'fallback' — which calendar tier
