@@ -1,5 +1,5 @@
 /**
- * Big Builds — twice-weekly kids' history/engineering podcast
+ * Big Builds — weekly (Thursday) kids' history/engineering podcast
  * Cloudflare Worker: fetch (site + feed + episodes) + scheduled (episode generation)
  *
  * Same shape as pokepod's index.js: export default { fetch, scheduled },

@@ -7,18 +7,14 @@
 		"directory": "public",
 		"binding": "ASSETS"
 	},
-	// every other day, 13:00 UTC (~8am Central). Changed from twice-weekly
-	// (Tue/Fri) Aug 17, 2026 after upgrading to Workers Paid removed the
-	// 5-cron-per-account ceiling that made a 6th trigger impossible on Free.
-	// Note: "*/2" on day-of-month is not a true period-2 cycle — it resets
-	// at each month boundary, so odd-length months (31 days) can produce
-	// one back-to-back pair of days when a month ends and the next begins
-	// on two consecutive odd dates. Cosmetic for a hobby show; a KV-tracked
-	// "days since last episode" check would be the precise fix if it ever
-	// matters.
+	// Thursdays, 13:00 UTC (~8am Central). Cut from every other day
+	// (day-of-month */2) on 2026-10-09: every podcast shares one ElevenLabs
+	// Creator plan and the total was well over its 100k credits/month.
+	// Day NAMES, never numbers: Cloudflare cron weekdays are 1 = Sunday.
+	// Keep stl-dispatcher's reconcile.js declaration identical.
 	"triggers": {
 		"crons": [
-			"0 13 */2 * *"
+			"0 13 * * THU"
 		]
 	},
 	"r2_buckets": [
