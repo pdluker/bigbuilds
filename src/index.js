@@ -154,7 +154,12 @@ export default {
   },
 
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(runEpisodeGeneration(env, new Date(event.scheduledTime)));
+    // Keep the error (2026-11-05): the Oct 29 and Nov 5 failures left no record.
+    ctx.waitUntil(runEpisodeGeneration(env, new Date(event.scheduledTime)).catch(async (err) => {
+      console.error('episode generation failed:', err.message);
+      await env.PODCAST_BUCKET.put('last-error.json', JSON.stringify({ at: new Date().toISOString(), error: String(err.message).slice(0, 500) }));
+      throw err;
+    }));
   },
 };
 
