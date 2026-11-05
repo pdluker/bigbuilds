@@ -144,6 +144,9 @@ async function callAnthropic(system, userContent, env) {
     body: JSON.stringify({
       model: 'claude-sonnet-5-5',
       max_tokens: 6000,
+      // Sonnet 5.5 runs adaptive thinking by default, which shares max_tokens
+      // and can leave no text block. between_tools is its lowest setting.
+      thinking: { type: 'between_tools' },
       system,
       messages: [{ role: 'user', content: userContent }],
     }),
