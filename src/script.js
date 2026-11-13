@@ -133,6 +133,11 @@ function countWords(text) {
   return text.trim().split(/\s+/).filter(Boolean).length;
 }
 
+// Structured outputs (2026-11-13): the Nov 12 run returned plain narration
+// instead of JSON, so the "Return ONLY valid JSON" instruction alone isn't
+// enough. The API now constrains the reply to this shape.
+const SCRIPT_SCHEMA = { type: 'object', properties: { narration: { type: 'string' }, summary: { type: 'string' } }, required: ['narration', 'summary'], additionalProperties: false };
+
 async function callAnthropic(system, userContent, env) {
   const response = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -147,6 +152,7 @@ async function callAnthropic(system, userContent, env) {
       // Sonnet 5.5 runs adaptive thinking by default, which shares max_tokens
       // and can leave no text block. between_tools is its lowest setting.
       thinking: { type: 'between_tools' },
+      output_config: { format: { type: 'json_schema', schema: SCRIPT_SCHEMA } },
       system,
       messages: [{ role: 'user', content: userContent }],
     }),
